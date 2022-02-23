@@ -749,7 +749,11 @@ auto PresetsManager::find_autoload(const PresetType& preset_type,
 void PresetsManager::autoload(const PresetType& preset_type,
                               const std::string& device_name,
                               const std::string& device_profile) {
-  const auto name = find_autoload(preset_type, device_name, device_profile);
+  auto name = find_autoload(preset_type, device_name, device_profile);
+
+  if (name.empty()) {
+    name = find_autoload(preset_type, util::any_device, "");
+  }
 
   if (!name.empty()) {
     util::debug(log_tag + "autoloading preset " + name + " for device " + device_name);

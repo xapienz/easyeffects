@@ -140,4 +140,14 @@ auto create(const NodeInfo& info) -> NodeInfoHolder* {
   return holder;
 }
 
+auto create_any() -> NodeInfoHolder* {
+  auto* holder = static_cast<NodeInfoHolder*>(g_object_new(EE_TYPE_NODE_INFO_HOLDER, nullptr));
+
+  holder->info->timestamp = util::timepoint_to_long(std::chrono::system_clock::now());
+  holder->info->name = util::any_device;
+  holder->info->description = "Any device";
+
+  return holder;
+}
+
 }  // namespace ui::holders

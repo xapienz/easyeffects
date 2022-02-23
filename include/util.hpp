@@ -41,6 +41,8 @@ const double minimum_db_d_level = -100.0;
 const float minimum_linear_level = 0.00001F;
 const double minimum_linear_d_level = 0.00001;
 
+const std::string any_device = "any";
+
 void debug(const std::string& s);
 void error(const std::string& s);
 void critical(const std::string& s);

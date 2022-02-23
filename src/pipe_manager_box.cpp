@@ -176,7 +176,6 @@ void on_autoloading_add_output_profile(PipeManagerBox* self, GtkButton* btn) {
   }
 
   auto* preset_name = gtk_string_object_get_string(GTK_STRING_OBJECT(selected_preset));
-
   self->data->application->presets_manager->add_autoload(PresetType::output, preset_name, holder->info->name,
                                                          holder->info->description, device_profile);
 }
@@ -385,6 +384,23 @@ void setup(PipeManagerBox* self, app::Application* application) {
   auto pm = application->pm;
 
   self->data->ts = std::make_unique<TestSignals>(pm);
+
+  {
+    auto holder = ui::holders::create_any();
+
+    g_list_store_append(self->output_devices_model, holder);
+    g_list_store_append(self->autoloading_output_devices_model, holder);
+
+    g_object_unref(holder);
+  }
+  {
+    auto holder = ui::holders::create_any();
+
+    g_list_store_append(self->input_devices_model, holder);
+    g_list_store_append(self->autoloading_input_devices_model, holder);
+
+    g_object_unref(holder);
+  }
 
   for (const auto& [ts, node] : pm->node_map) {
     if (node.name == pm->ee_sink_name || node.name == pm->ee_source_name) {

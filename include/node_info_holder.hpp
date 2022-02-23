@@ -41,5 +41,6 @@ struct _NodeInfoHolder {
 };
 
 auto create(const NodeInfo& info) -> NodeInfoHolder*;
+auto create_any() -> NodeInfoHolder*;
 
 }  // namespace ui::holders
